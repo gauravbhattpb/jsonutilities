@@ -1,0 +1,21 @@
+{
+  "name": "angularsidekick",
+  "description": "",
+  "main": "",
+  "authors": [
+    "gauravbhattpb <gaurav.bhatt@pb.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-filemanager": "^1.5.1"
+  }
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="stylesheets/style.css" type="text/css" rel="stylesheet"/>
+    <title>Elastic Search Schema Designer</title>
+</head>
+<body ng-app="JsonUtil" ng-controller="MainCtrl">
+<div class="container">
+    <header><h1></h1></header>
+    <div class="row">
+        <div class="col-md-12">
+            <form id="jsonForm" class="form-horizontal">
+                <fieldset>
+                    <legend>JSON DATA</legend>
+                    <div class="form-group">
+                        <textarea id="jsonTxt" class="form-control" ng-model="jsonTxt" rows="25"></textarea><br/>
+                        <button class="btn btn-primary" ng-click="flatJson()" data-toggle="modal" data-target="#flatModal">
+                            <label>Flat</label></button>
+                        <button class="btn btn-primary" ng-click="formatJson()" data-toggle="modal" data-target="#errorModal">
+                            <label>Format</label></button>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" onchange="angular.element(this).scope().file_changed(this)"/>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="modal fade" id="flatModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Flat data</h4>
+                </div>
+                <div class="modal-body container">
+                    <!--<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="esAddress" class="pull-left">ES Cluster</label>
+                                <input type="text" id="esAddress" class="form-control" ng-model="esAddress"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="indexName" class="pull-left">Index Name</label>
+                                <input id="indexName" type="text" class="form-control" ng-model="indexName"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="indexType" class="pull-left">Type</label>
+                                <input id="indexType" type="text" class="form-control" ng-model="indexType"/>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" ng-click="createIndex();">Create Index</button>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-responsive table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <form>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+                                                <input type="text" class="form-control" placeholder="Search json data" ng-model="searchValues">
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" ng-checked="(elementFlatArray | filter:{selected:true}).length > 0 && (elementFlatArray |
+                                           filter:{selected:true}).length === elementFlatArray.length" ng-click="toggleAll(state)"
+                                               ng-model="state"></th>
+                                    <th>Field Name</th>
+                                    <th>Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="elem in elementFlatArray | filter:searchValues">
+                                    <td><input type="checkbox" ng-checked="elem.selected" ng-click="elem.selected = !elem.selected">
+                                    </td>
+                                    <td>{{elem.key}}</td>
+                                    <td>{{elem.value}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="errorModal" class="modal fade" id="errorModal" role="dialog" ng-if="errorModal">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Flat data</h4>
+                </div>
+                <div class="modal-body container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea id="errorTxt" class="form-control" ng-model="errorTxt" rows="15" disabled="disabled"></textarea><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="vendor/angular/angular.min.js"></script>
+<script src="vendor/angular-route/angular-route.min.js"></script>
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
